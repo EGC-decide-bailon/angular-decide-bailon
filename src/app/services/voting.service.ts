@@ -12,13 +12,13 @@ import { QuestionOption } from "../models/questionOptions.model";
 })
 export class VotingService {
 
-  //private headers = new HttpHeaders({'Content-Type': 'application/json',
-    //'Access-Control-Allow-Origin': '*'});
+  private headers = new HttpHeaders({'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'});
 
   constructor(private http: HttpClient) { }
 
   getVotingsByUserId(id: number): Observable<object> {
-    return this.http.get(`${environment.apiUrl}gateway/voting/user/?id=${id}/`);
+    return this.http.get(`${environment.apiUrl}gateway/voting/user/?id=${id}`);
   }
 
   parseVoting(voting: any): Voting {
@@ -34,7 +34,7 @@ export class VotingService {
   }
 
   getVoting(id: number): Observable<object> {
-    return this.http.get(`${environment.apiUrl}gateway/voting/?id=${id}/`);
+    return this.http.get(`${environment.apiUrl}gateway/voting/?id=${id}`);
   }
 
   postData(data: { vote: { a: any; b: any; }; voting: number; voter: number; token: string; }): Observable<object> {
