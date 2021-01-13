@@ -4,6 +4,8 @@ import {QuestionOption} from '../models/questionOptions.model';
 import {AuthenticationService} from '../services/authentication.service';
 import {VotingService} from '../services/voting.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { Question } from '../models/question.model';
+import { getLocaleDateFormat } from '@angular/common';
 
 @Component({
   selector: 'app-votings',
@@ -12,22 +14,26 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class BoothComponent implements OnInit {
   singup: boolean;
-  booth: Voting [] =[];
+  voting: Voting;
   options:QuestionOption[] ;
 
   constructor(private route: ActivatedRoute, private router: Router, private votingService: VotingService, private authService: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.voting = new Voting(1,'','',(new Question('',[new QuestionOption(0,'',true),new QuestionOption(1,'',false)])),new Date(),new Date(),[]);
     this.singup = true;
-    const id = +this.route.snapshot.params.id;
-    console.log('Get voting stars');
-    this.votingService.getVoting(id).subscribe((res) => {
+    const tokenid = this.authService.getToken();
+    this.authService.getUser(tokenid).subscribe((res) => {
+      const id = (res as any).id;
+      console.log('se ha hecho la petición');
+      this.votingService.getVoting(id).subscribe((res) => {
       console.log('Resultado' + res);
-      this.booth = this.votingService.parseVotings(res[0] as any);
+        this.voting = this.votingService.parseVoting(res);
     }, error => {
       console.log(error);
     });
-  }
+  });
+}
 
   onSubmit(username: string, password: string, event: Event): void {
     event.preventDefault();
@@ -54,3 +60,5 @@ export class BoothComponent implements OnInit {
   }
 
 }
+
+  

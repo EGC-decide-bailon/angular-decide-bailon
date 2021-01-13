@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import {HttpClientModule} from '@angular/common/http';
-import { VotingsComponent } from './votings/votings.component';
+import { BoothComponent } from './booth/booth.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -12,8 +12,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   declarations: [
     AppComponent,
     LoginComponent,
-    VotingsComponent,
-    PageNotFoundComponent
+    BoothComponent,
+    PageNotFoundComponent,
+    
   ],
   imports: [
     BrowserModule,

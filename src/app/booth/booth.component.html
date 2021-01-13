@@ -2,7 +2,7 @@
 <div id="app-booth" class="principal">
 
   
-    <h1>{{ voting.id }} - {{ voting.name }}</h1>
+    <h1>{{voting.id}} - {{voting.name}}</h1>
 
     <form *ngIf="!singup">
 
@@ -34,7 +34,7 @@
       <form>
         <div class="form-check-inline" *ngFor = "let option of options;let i=index">
 
-          <label for="option" class="form-check-label" >
+          <label *ngfor="let option of voting.question.options" class="form-check-label" >
             {{option}}</label>
           <input #option type="radio" class="form-check-input" id={{i}} name="option" value="option">
 

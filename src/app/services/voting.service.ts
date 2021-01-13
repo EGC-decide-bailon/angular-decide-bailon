@@ -18,24 +18,23 @@ export class VotingService {
   constructor(private http: HttpClient) { }
 
   getVotingsByUserId(id: number): Observable<object> {
-    return this.http.get(`${environment.apiUrl}voting/user/?id=${id}`);
+    return this.http.get(`${environment.apiUrl}gateway/voting/user/?id=${id}/`);
   }
 
-  parseVotings(votings: any): Voting[] {
-    const res: Voting [] = [];
-    votings.forEach(v => {
+  parseVoting(voting: any): Voting {
+    
       const options: QuestionOption[] = [];
-      v.question.options.forEach(o => {
-        options.push(new QuestionOption(o.desc,o.number, o.option, false));
+      voting.question.options.forEach(o => {
+        options.push(new QuestionOption(o.num, o.option, false));
       });
-      const question = new Question(v.question.desc, options);
-      res.push(new Voting(v.id, v.name, v.desc, v.question, v.start_date, v.end_date, v.pub_key));
-    });
-    return res;
+      const question = new Question(voting.question.desc, options);
+      voting = new Voting(voting.id, voting.name, voting.desc,question, voting.startDate, voting.endDate, voting.pubKey);
+    
+    return voting;
   }
 
   getVoting(id: number): Observable<object> {
-    return this.http.get(`${environment.apiUrl}voting/?id=${id}`);
+    return this.http.get(`${environment.apiUrl}gateway/voting/?id=${id}/`);
   }
 
   postData(data: { vote: { a: any; b: any; }; voting: number; voter: number; token: string; }): Observable<object> {
