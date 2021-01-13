@@ -25,7 +25,7 @@ export class VotingsComponent implements OnInit {
     this.logged = true;
     this.voting = new Voting(1, '', '', (new Question('',
       [new QuestionOption(0, '', true),
-        new QuestionOption(1, '', false)])), new Date(), new Date(),[]);
+        new QuestionOption(1, '', false)])), new Date(), new Date(), []);
     this.singup = true;
     const tokenId = this.authService.getToken();
     this.authService.getUser(tokenId).subscribe((res) => {

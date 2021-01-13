@@ -9,5 +9,4 @@ export class Voting {
       public startDate: Date,
       public endDate: Date,
       public pubKey: []) {}
-    
 }
