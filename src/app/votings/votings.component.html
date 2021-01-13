@@ -3,26 +3,9 @@
 
     <h1>{{voting.id}} - {{voting.name}}</h1>
 
-    <form *ngIf="!logged">
-
-      <div class="form-group">
-        <label for="inputUsername" class="mr-sm-2" > Username : </label>
-        <input #username id="inputUsername" class="form-control" placeholder="Username" required autofocus>
-      </div>
-
-      <div class="form-group">
-        <label for="inputPassword" class="mr-sm-2" > Password : </label>
-        <input #password type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-      </div>
-
-      <div class="form-group">
-        <button class="button button-3" type="submit"
-                (click)="onSubmit(username.value, password.value, $event)">
-          Sign in
-        </button>
+    <div *ngIf="!logged">
+      <app-login></app-login>
     </div>
-
-    </form>
 
     <!-- Voting -->
     <div  *ngIf="logged">
@@ -40,7 +23,7 @@
         </div>
         <div class="boton">
           <button class="button button-3" type="submit"
-                  (click)="onSubmit(option.id, $event)">
+                  (click)="onSubmit('patata','patata2', $event)">
                   Vote
           </button>
         </div>

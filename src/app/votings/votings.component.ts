@@ -15,12 +15,14 @@ import { Question } from '../models/question.model';
 export class VotingsComponent implements OnInit {
   singup: boolean;
   voting: Voting;
+  logged: boolean;
   options: QuestionOption[] ;
 
   constructor(private route: ActivatedRoute, private router: Router, private votingService: VotingService,
               private authService: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.logged = true;
     this.voting = new Voting(1, '', '', (new Question('',
       [new QuestionOption(0, '', true),
         new QuestionOption(1, '', false)])), new Date(), new Date(),[]);
