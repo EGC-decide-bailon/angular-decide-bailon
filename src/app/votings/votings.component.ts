@@ -9,19 +9,20 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./votings.component.css']
 })
 export class VotingsComponent implements OnInit {
-  singup: boolean;
+  logged: boolean;
 
-  options:string[] = ["option","option"];
+  options: string[] = ['option', 'option'];
 
-  constructor(private route: ActivatedRoute, private router: Router, private votingService: VotingService, private authService: AuthenticationService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private votingService: VotingService,
+              private authService: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.singup = true;
+    this.logged = true;
     const id = +this.route.snapshot.params.id;
     console.log('Get voting stars');
     this.votingService.getVoting(id).subscribe((res) => {
       console.log('Resultado' + res);
-      //this.voting = this.votingService.parseVoting(res[0] as any);
+      // this.voting = this.votingService.parseVoting(res[0] as any);
     }, error => {
       console.log(error);
     });
@@ -41,7 +42,7 @@ export class VotingsComponent implements OnInit {
         if (res.hasOwnProperty('token')) {
           this.authService.setToken((res as any).token);
           this.authService.changeLoggedStatus(true);
-          this.singup = true;
+          this.logged = true;
         } else {
           this.authService.changeLoggedStatus(false);
         }
