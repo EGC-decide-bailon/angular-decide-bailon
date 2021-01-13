@@ -1,32 +1,37 @@
 
 <div id="app-booth" class="principal">
 
+    <h1>{{voting.id}} - {{voting.name}}</h1>
 
-    <h1>[[ voting.id ]] - [[ voting.name ]]</h1>
+<<<<<<< HEAD
+=======
 
-
+>>>>>>> 07c9b7f02d886a0f04fc046b1106d9bbb5129e4e
     <div *ngIf="!logged">
       <app-login></app-login>
     </div>
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 07c9b7f02d886a0f04fc046b1106d9bbb5129e4e
     <!-- Voting -->
     <div  *ngIf="logged">
       <span>loged</span>
 
-      <h2>[[ voting.question.desc ]]</h2>
+      <h2>{{ voting.question.desc }}</h2>
 
       <form>
         <div class="form-check-inline" *ngFor = "let option of options;let i=index">
 
-          <label for="option" class="form-check-label" >
+          <label *ngfor="let option of voting.question.options" class="form-check-label" >
             {{option}}</label>
           <input #option type="radio" class="form-check-input" id={{i}} name="option" value="option">
 
         </div>
         <div class="boton">
           <button class="button button-3" type="submit"
-                  (click)="onSubmit(option.id, $event)">
+                  (click)="onSubmit('patata','patata2', $event)">
                   Vote
           </button>
         </div>
