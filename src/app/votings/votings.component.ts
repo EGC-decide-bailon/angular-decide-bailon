@@ -17,7 +17,7 @@ export class VotingsComponent implements OnInit {
               private authService: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.logged = true;
+    this.logged = !true;
     const id = +this.route.snapshot.params.id;
     console.log('Get voting stars');
     this.votingService.getVoting(id).subscribe((res) => {
