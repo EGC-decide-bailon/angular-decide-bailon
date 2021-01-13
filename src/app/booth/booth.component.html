@@ -1,10 +1,15 @@
 
 <div id="app-booth" class="principal">
 
+<<<<<<< HEAD:src/app/booth/booth.component.html
   
     <h1>{{voting.id}} - {{voting.name}}</h1>
+=======
 
-    <form *ngIf="!singup">
+    <h1>[[ voting.id ]] - [[ voting.name ]]</h1>
+>>>>>>> master:src/app/votings/votings.component.html
+
+    <form *ngIf="!logged">
 
       <div class="form-group">
         <label for="inputUsername" class="mr-sm-2" > Username : </label>
@@ -26,7 +31,7 @@
     </form>
 
     <!-- Voting -->
-    <div  *ngIf="singup">
+    <div  *ngIf="logged">
       <span>loged</span>
 
       <h2>{{ voting.question.desc }}</h2>
@@ -46,7 +51,7 @@
           </button>
         </div>
       </form>
-  
+
     </div>
 
 </div>
