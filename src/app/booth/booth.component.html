@@ -2,7 +2,7 @@
 <div id="app-booth" class="principal">
 
   
-    <h1>[[ voting.id ]] - [[ voting.name ]]</h1>
+    <h1>{{ voting.id }} - {{ voting.name }}</h1>
 
     <form *ngIf="!singup">
 
@@ -29,7 +29,7 @@
     <div  *ngIf="singup">
       <span>loged</span>
 
-      <h2>[[ voting.question.desc ]]</h2>
+      <h2>{{ voting.question.desc }}</h2>
 
       <form>
         <div class="form-check-inline" *ngFor = "let option of options;let i=index">

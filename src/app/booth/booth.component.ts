@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { Voting } from '../models/voting.model';
+import {QuestionOption} from '../models/questionOptions.model';
 import {AuthenticationService} from '../services/authentication.service';
 import {VotingService} from '../services/voting.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-votings',
-  templateUrl: './votings.component.html',
-  styleUrls: ['./votings.component.css']
+  templateUrl: './booth.component.html',
+  styleUrls: ['./booth.component.css']
 })
-export class VotingsComponent implements OnInit {
+export class BoothComponent implements OnInit {
   singup: boolean;
-
-  options:string[] = ["option","option"];
+  booth: Voting [] =[];
+  options:QuestionOption[] ;
 
   constructor(private route: ActivatedRoute, private router: Router, private votingService: VotingService, private authService: AuthenticationService) { }
 
@@ -21,7 +23,7 @@ export class VotingsComponent implements OnInit {
     console.log('Get voting stars');
     this.votingService.getVoting(id).subscribe((res) => {
       console.log('Resultado' + res);
-      //this.voting = this.votingService.parseVoting(res[0] as any);
+      this.booth = this.votingService.parseVotings(res[0] as any);
     }, error => {
       console.log(error);
     });
