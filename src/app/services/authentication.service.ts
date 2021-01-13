@@ -17,12 +17,13 @@ export class AuthenticationService {
   constructor(private http: HttpClient) {
   }
 
-  login(username: string, password: string): Observable<object> {
-    if (username !== '' && password !== '') {
-      return this.http.post<any>(`${environment.apiUrl}gateway/authentication/login`, {
-        username,
-        password,
-      });
+  login(username2: string, password2: string): Observable<object> {
+    if (username2 !== '' && password2 !== '') {
+      const body = {
+        username: username2,
+        password: password2
+      };
+      return this.http.post<any>(`${environment.apiUrl}gateway/authentication/login/`, body);
     }
   }
 
