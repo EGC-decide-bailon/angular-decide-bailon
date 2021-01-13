@@ -5,51 +5,37 @@ import {AuthenticationService} from '../services/authentication.service';
 import {VotingService} from '../services/voting.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Question } from '../models/question.model';
-import { getLocaleDateFormat } from '@angular/common';
 
 @Component({
   selector: 'app-votings',
-  templateUrl: './booth.component.html',
-  styleUrls: ['./booth.component.css']
+  templateUrl: './votings.component.html',
+  styleUrls: ['./votings.component.css']
 })
-<<<<<<< HEAD:src/app/booth/booth.component.ts
-export class BoothComponent implements OnInit {
+
+export class VotingsComponent implements OnInit {
   singup: boolean;
   voting: Voting;
-  options:QuestionOption[] ;
-=======
-export class VotingsComponent implements OnInit {
-  logged: boolean;
-
-  options: string[] = ['option', 'option'];
->>>>>>> master:src/app/votings/votings.component.ts
+  options: QuestionOption[] ;
 
   constructor(private route: ActivatedRoute, private router: Router, private votingService: VotingService,
               private authService: AuthenticationService) { }
 
   ngOnInit(): void {
-<<<<<<< HEAD:src/app/booth/booth.component.ts
-    this.voting = new Voting(1,'','',(new Question('',[new QuestionOption(0,'',true),new QuestionOption(1,'',false)])),new Date(),new Date(),[]);
+    this.voting = new Voting(1, '', '', (new Question('',
+      [new QuestionOption(0, '', true),
+        new QuestionOption(1, '', false)])), new Date(), new Date(),[]);
     this.singup = true;
-    const tokenid = this.authService.getToken();
-    this.authService.getUser(tokenid).subscribe((res) => {
+    const tokenId = this.authService.getToken();
+    this.authService.getUser(tokenId).subscribe((res) => {
       const id = (res as any).id;
       console.log('se ha hecho la petición');
-      this.votingService.getVoting(id).subscribe((res) => {
-      console.log('Resultado' + res);
-        this.voting = this.votingService.parseVoting(res);
-=======
-    this.logged = true;
-    const id = +this.route.snapshot.params.id;
-    console.log('Get voting stars');
-    this.votingService.getVoting(id).subscribe((res) => {
-      console.log('Resultado' + res);
-      // this.voting = this.votingService.parseVoting(res[0] as any);
->>>>>>> master:src/app/votings/votings.component.ts
-    }, error => {
-      console.log(error);
+      this.votingService.getVoting(id).subscribe((res2) => {
+        console.log('Resultado' + res);
+        this.voting = this.votingService.parseVoting(res2);
+        }, error => {
+          console.log(error);
+      });
     });
-  });
 }
 
   onSubmit(username: string, password: string, event: Event): void {
@@ -66,7 +52,6 @@ export class VotingsComponent implements OnInit {
         if (res.hasOwnProperty('token')) {
           this.authService.setToken((res as any).token);
           this.authService.changeLoggedStatus(true);
-          this.logged = true;
         } else {
           this.authService.changeLoggedStatus(false);
         }
@@ -78,4 +63,4 @@ export class VotingsComponent implements OnInit {
 
 }
 
-  
+
