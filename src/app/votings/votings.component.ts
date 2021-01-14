@@ -37,7 +37,7 @@ export class VotingsComponent implements OnInit {
   
   submitForm(form: NgForm) {
     this.isSubmitted = true;
-    if(!form.valid) {
+    if (!form.valid) {
       return false;
     } else {
     alert(JSON.stringify(form.value))
@@ -73,8 +73,8 @@ onSubmitVote(event: Event): void {
     this.si = 1;
     this.no = 0;
   }else{
-    this.si= 0;
-    this.no= 1;
+    this.si = 0;
+    this.no = 1;
   }
 
   const tokenid = this.authService.getToken();
@@ -98,9 +98,6 @@ onSubmitVote(event: Event): void {
     this.loading = false;
   });
 }
-
-  
-
 }
 
 
