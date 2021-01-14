@@ -4,50 +4,33 @@
   
     <h1>{{ voting.id }} - {{ voting.name }}</h1>
 
-    <form *ngIf="!singup">
-
-      <div class="form-group">
-        <label for="inputUsername" class="mr-sm-2" > Username : </label>
-        <input #username id="inputUsername" class="form-control" placeholder="Username" required autofocus>
-      </div>
-
-      <div class="form-group">
-        <label for="inputPassword" class="mr-sm-2" > Password : </label>
-        <input #password type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-      </div>
-
-      <div class="form-group">
-        <button class="button button-3" type="submit"
-                (click)="onSubmit(username.value, password.value, $event)">
-          Sign in
-        </button>
-
-
-
-
-    <div *ngIf="!logged">
+    <!-- <div *ngIf="!logged">
       <app-login></app-login>
-    </div>
+    </div> -->
 
     <!-- Voting -->
-    <div  *ngIf="singup">
-      <span>loged</span>
+    <div>      
 
       <h2>{{ voting.question.desc }}</h2>
 
-      <form>
-        <div class="form-check-inline" *ngFor = "let option of voting.question.options">
-
-          <label  for="{{option.num}}" class="form-check-label" >
-            {{option.numb}}. {{option.option}}</label>
-          <input #option type="radio" class="form-check-input" [(ngModel)]="datos" id={{option.num}} name="option" value="{{option.num}}">
-
+      <form [formGroup]="votingForm" (ngSubmit)="onSubmitVote($event)" novalidate>
+        <div class="custom-control custom-radio" >
+          <input type="radio" class="form-check-input" id="si" name="option" value="1">
+          <label for="si" class="form-check-label" >1. Si</label>            
         </div>
+
+        <div class="custom-control custom-radio" >
+          <input type="radio" class="form-check-input" id="no" name="option" value="0">
+          <label for="no" class="form-check-label" >2. No</label>            
+        </div>
+        
+        <div *ngIf="isSubmitted && myForm.invalid">
+          <p>Por favor seleccione una opción</p>
+       </div>
+
+
         <div class="boton">
-          <button class="button button-3" type="submit"
-                  (click)="onSubmitVote(datos, $event)">
-                  Vote
-          </button>
+          <button class="button button-3" type="submit"> Vota </button>
         </div>
       </form>
 

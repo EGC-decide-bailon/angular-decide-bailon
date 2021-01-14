@@ -5,6 +5,9 @@ import {AuthenticationService} from '../services/authentication.service';
 import {VotingService} from '../services/voting.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Question } from '../models/question.model';
+import {AbstractControl, NgForm} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-votings',
@@ -16,9 +19,30 @@ export class VotingsComponent implements OnInit {
   singup: boolean;
   voting: Voting;
   options: QuestionOption[] ;
+  loading: boolean;
+  isSubmitted = false;
+  si: number;
+  no: number;
 
-  constructor(private route: ActivatedRoute, private router: Router, private votingService: VotingService,
+  constructor(public fb: FormBuilder, private route: ActivatedRoute, private router: Router, private votingService: VotingService,
               private authService: AuthenticationService) { }
+
+  votingForm = this.fb.group({
+    gender: ['', [Validators.required]]
+  });
+
+  get myForm(): AbstractControl {
+    return this.votingForm.get('option');
+  }
+
+  submitForm(form: NgForm): boolean {
+    this.isSubmitted = true;
+    if (!form.valid) {
+      return false;
+    } else {
+    alert(JSON.stringify(form.value));
+    }
+  }
 
   ngOnInit(): void {
     this.singup = true;
@@ -39,20 +63,27 @@ export class VotingsComponent implements OnInit {
     });
 }
 
-onSubmit(datos: string, event: Event): void {
-  if (datos === undefined) {
-    console.log('Selecciona una opción');
-    return;
-  }
+onSubmitVote(event: Event): void {
 
   event.preventDefault();
-  const v = datos;
+
+  this.isSubmitted = true;
+  this.loading = true;
+
+  if (this.myForm.value === 1){
+    this.si = 1;
+    this.no = 0;
+  }else{
+    this.si = 0;
+    this.no = 1;
+  }
+
   const tokenid = this.authService.getToken();
   this.authService.getUser(tokenid).subscribe((res) => {
     const id = (res as any).id;
 
     const data = {
-      vote: { a: v, b: v },
+      vote: { a: this.si , b: this.no },
       voting: this.voting.id,
       voter: id,
       token: tokenid
@@ -66,7 +97,6 @@ onSubmit(datos: string, event: Event): void {
     console.log(error);
   });
 }
-
 }
 
 
