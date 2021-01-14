@@ -66,11 +66,7 @@ export class VotingsComponent implements OnInit {
 }
 
 onSubmitVote(datos: string, event: Event): void {
-  if (datos === undefined) {
-    console.log('Selecciona una opción');
-    return;
-  }
-
+  
   event.preventDefault();
   this.isSubmitted = true;
   this.loading = true;
