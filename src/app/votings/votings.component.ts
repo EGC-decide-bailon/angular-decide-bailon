@@ -16,6 +16,8 @@ export class VotingsComponent implements OnInit {
   singup: boolean;
   voting: Voting;
   options: QuestionOption[] ;
+  submitted: boolean;
+  loading: boolean;
 
   constructor(private route: ActivatedRoute, private router: Router, private votingService: VotingService,
               private authService: AuthenticationService) { }
@@ -39,7 +41,7 @@ export class VotingsComponent implements OnInit {
     });
 }
 
-onSubmit(datos: string, event: Event): void {
+onSubmitVote(datos: string, event: Event): void {
   if (datos === undefined) {
     console.log('Selecciona una opción');
     return;
@@ -54,7 +56,7 @@ onSubmit(datos: string, event: Event): void {
     const id = (res as any).id;
 
     const data = {
-      vote: { a: , b: v },
+      vote: { a: datos , b: datos },
       voting: this.voting.id,
       voter: id,
       token: tokenid
