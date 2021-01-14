@@ -5,7 +5,7 @@ import {AuthenticationService} from '../services/authentication.service';
 import {VotingService} from '../services/voting.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Question } from '../models/question.model';
-import { NgForm } from '@angular/forms';
+import {AbstractControl, NgForm} from '@angular/forms';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -31,18 +31,18 @@ export class VotingsComponent implements OnInit {
     gender: ['', [Validators.required]]
   });
 
-  get myForm() {
+  get myForm(): AbstractControl {
     return this.votingForm.get('option');
   }
-  
-  submitForm(form: NgForm) {
+
+  submitForm(form: NgForm): boolean {
     this.isSubmitted = true;
     if (!form.valid) {
       return false;
     } else {
-    alert(JSON.stringify(form.value))
+    alert(JSON.stringify(form.value));
     }
-  }           
+  }
 
   ngOnInit(): void {
     this.singup = true;
@@ -64,7 +64,7 @@ export class VotingsComponent implements OnInit {
 }
 
 onSubmitVote(event: Event): void {
-  
+
   event.preventDefault();
 
   this.isSubmitted = true;
