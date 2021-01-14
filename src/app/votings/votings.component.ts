@@ -15,14 +15,13 @@ import { Question } from '../models/question.model';
 export class VotingsComponent implements OnInit {
   singup: boolean;
   voting: Voting;
-  logged: boolean;
   options: QuestionOption[] ;
 
   constructor(private route: ActivatedRoute, private router: Router, private votingService: VotingService,
               private authService: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.logged = true;
+    this.singup = true;
     this.voting = new Voting(1, '', '', (new Question('',
       [new QuestionOption(0, '', true),
         new QuestionOption(1, '', false)])), new Date(), new Date(), []);
@@ -38,6 +37,38 @@ export class VotingsComponent implements OnInit {
           console.log(error);
       });
     });
+}
+
+onSubmit(datos: string, event: Event): void {
+  if (datos === undefined) {
+    console.log('Selecciona una opción');
+    return;
+  }
+
+  event.preventDefault();
+  this.submitted = true;
+  this.loading = true;
+  const v = datos;
+  const tokenid = this.authService.getToken();
+  this.authService.getUser(tokenid).subscribe((res) => {
+    const id = (res as any).id;
+
+    const data = {
+      vote: { a: , b: v },
+      voting: this.voting.id,
+      voter: id,
+      token: tokenid
+    };
+    const e = this.votingService.postData(data).subscribe((ser) => {
+      this.router.navigate(['']);
+    }, (error) => {
+      console.log(error);
+      this.loading = false;
+    });
+  }, (error) => {
+    console.log(error);
+    this.loading = false;
+  });
 }
 
   onSubmit(username: string, password: string, event: Event): void {
