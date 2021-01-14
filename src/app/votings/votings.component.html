@@ -4,29 +4,33 @@
   
     <h1>{{ voting.id }} - {{ voting.name }}</h1>
 
-    <div *ngIf="!logged">
+    <!-- <div *ngIf="!logged">
       <app-login></app-login>
-    </div>
+    </div> -->
 
     <!-- Voting -->
-    <div  *ngIf="singup">
-      <span>loged</span>
+    <div  *ngIf="!logged">      
 
       <h2>{{ voting.question.desc }}</h2>
 
-      <form>
-        <div class="form-check-inline" *ngFor = "let option of voting.question.options">
-
-          <label  for="{{option.num}}" class="form-check-label" >
-            {{option.num}}. {{option.option}}</label>
-          <input #option type="radio" class="form-check-input" [(ngModel)]="datos" id={{option.num}} name="option" value="{{option.num}}">
-
+      <form [formGroup]="votingForm" (submit)="submitForm(myForm)" novalidate>
+        <div class="custom-control custom-radio" >
+          <input type="radio" class="form-check-input" id="si" name="option" value="1">
+          <label for="si" class="form-check-label" >1. Si</label>            
         </div>
+
+        <div class="custom-control custom-radio" >
+          <input type="radio" class="form-check-input" id="no" name="option" value="0">
+          <label for="no" class="form-check-label" >2. No</label>            
+        </div>
+        
+        <div *ngIf="isSubmitted && myForm.invalid">
+          <p>Por favor seleccione una opción</p>
+       </div>
+
+
         <div class="boton">
-          <button class="button button-3" type="submit"
-                  (click)="onSubmitVote(datos, $event)">
-                  Vote
-          </button>
+          <button class="button button-3" type="submit"> Vota </button>
         </div>
       </form>
 

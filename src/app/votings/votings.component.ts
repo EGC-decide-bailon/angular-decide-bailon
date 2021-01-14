@@ -5,6 +5,9 @@ import {AuthenticationService} from '../services/authentication.service';
 import {VotingService} from '../services/voting.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Question } from '../models/question.model';
+import { NgForm } from '@angular/forms';
+import { FormBuilder, Validators } from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-votings',
@@ -16,11 +19,32 @@ export class VotingsComponent implements OnInit {
   singup: boolean;
   voting: Voting;
   options: QuestionOption[] ;
-  submitted: boolean;
   loading: boolean;
+  isSubmitted = false;
+  si:number;
+  no:number;
 
-  constructor(private route: ActivatedRoute, private router: Router, private votingService: VotingService,
+  constructor(public fb: FormBuilder,private route: ActivatedRoute, private router: Router, private votingService: VotingService,
               private authService: AuthenticationService) { }
+
+
+
+  votingForm = this.fb.group({
+    gender: ['', [Validators.required]]
+  })
+  
+  get myForm() {
+    return this.votingForm.get('option');
+  }
+  
+  submitForm(form: NgForm) {
+    this.isSubmitted = true;
+    if(!form.valid) {
+      return false;
+    } else {
+    alert(JSON.stringify(form.value))
+    }
+  }            
 
   ngOnInit(): void {
     this.singup = true;
@@ -48,15 +72,24 @@ onSubmitVote(datos: string, event: Event): void {
   }
 
   event.preventDefault();
-  this.submitted = true;
+  this.isSubmitted = true;
   this.loading = true;
-  const v = datos;
+
+
+  if(this.myForm.value==1){
+    this.si=1;
+    this.no=0;
+  }else{
+    this.si=0;
+    this.no=1;
+  }
+
   const tokenid = this.authService.getToken();
   this.authService.getUser(tokenid).subscribe((res) => {
     const id = (res as any).id;
 
     const data = {
-      vote: { a: datos , b: datos },
+      vote: { a: this.si , b: this.no },
       voting: this.voting.id,
       voter: id,
       token: tokenid
@@ -73,28 +106,7 @@ onSubmitVote(datos: string, event: Event): void {
   });
 }
 
-  onSubmit(username: string, password: string, event: Event): void {
-    event.preventDefault();
-
-    // stop here if form is invalid
-    if (username === '' || password === '') {
-      return;
-    }
-
-    this.authService.login(username, password).subscribe(
-      res => {
-        console.log(res);
-        if (res.hasOwnProperty('token')) {
-          this.authService.setToken((res as any).token);
-          this.authService.changeLoggedStatus(true);
-        } else {
-          this.authService.changeLoggedStatus(false);
-        }
-      },
-      error => {
-        this.authService.changeLoggedStatus(false);
-      });
-  }
+  
 
 }
 
