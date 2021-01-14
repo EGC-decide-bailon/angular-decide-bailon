@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   apiUrl: 'https://decide-voting.herokuapp.com/',
-  appUrl: 'http://localhost:8080/'
+  appUrl: 'http://localhost:4200/'
 };

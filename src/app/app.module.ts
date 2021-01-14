@@ -13,7 +13,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AppComponent,
     LoginComponent,
     VotingsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+
   ],
   imports: [
     BrowserModule,

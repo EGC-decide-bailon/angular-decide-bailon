@@ -21,12 +21,16 @@
                 (click)="onSubmit(username.value, password.value, $event)">
           Sign in
         </button>
+
+
+
+
+    <div *ngIf="!logged">
+      <app-login></app-login>
     </div>
 
-    </form>
-
     <!-- Voting -->
-    <div  *ngIf="singup">
+    <div  *ngIf="logged">
       <span>loged</span>
 
       <h2>{{ voting.question.desc }}</h2>
@@ -46,7 +50,7 @@
           </button>
         </div>
       </form>
-  
+
     </div>
     
 </div>
