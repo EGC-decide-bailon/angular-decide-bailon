@@ -66,6 +66,7 @@ export class VotingsComponent implements OnInit {
 onSubmitVote(event: Event): void {
   
   event.preventDefault();
+
   this.isSubmitted = true;
   this.loading = true;
 
@@ -91,11 +92,9 @@ onSubmitVote(event: Event): void {
       this.router.navigate(['']);
     }, (error) => {
       console.log(error);
-      this.loading = false;
     });
   }, (error) => {
     console.log(error);
-    this.loading = false;
   });
 }
 }

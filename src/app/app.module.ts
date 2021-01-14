@@ -8,6 +8,11 @@ import { VotingsComponent } from './votings/votings.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { IndexComponent } from './index/index.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -15,6 +20,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     VotingsComponent,
     PageNotFoundComponent,
+    IndexComponent,
+    HeaderComponent,
+    FooterComponent,
 
   ],
   imports: [
@@ -22,8 +30,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
-    
+    ReactiveFormsModule, 
+    NgbModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

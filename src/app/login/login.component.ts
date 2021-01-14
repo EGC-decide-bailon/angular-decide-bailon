@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../services/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   loading: boolean;
   logged: string;
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -20,7 +21,6 @@ export class LoginComponent implements OnInit {
     event.preventDefault();
     this.submitted = true;
 
-    // stop here if form is invalid
     if (username === '' || password === '') {
       return;
     }
@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
         if (res.hasOwnProperty('token')) {
           this.authService.setToken((res as any).token);
           this.authService.changeLoggedStatus(true);
+          this.router.navigate(['']).then(r => ' ');
         } else {
           this.authService.changeLoggedStatus(false);
         }
