@@ -46,15 +46,13 @@ onSubmit(datos: string, event: Event): void {
   }
 
   event.preventDefault();
-  this.submitted = true;
-  this.loading = true;
   const v = datos;
   const tokenid = this.authService.getToken();
   this.authService.getUser(tokenid).subscribe((res) => {
     const id = (res as any).id;
 
     const data = {
-      vote: { a: , b: v },
+      vote: { a: v, b: v },
       voting: this.voting.id,
       voter: id,
       token: tokenid
@@ -63,36 +61,11 @@ onSubmit(datos: string, event: Event): void {
       this.router.navigate(['']);
     }, (error) => {
       console.log(error);
-      this.loading = false;
     });
   }, (error) => {
     console.log(error);
-    this.loading = false;
   });
 }
-
-  onSubmit(username: string, password: string, event: Event): void {
-    event.preventDefault();
-
-    // stop here if form is invalid
-    if (username === '' || password === '') {
-      return;
-    }
-
-    this.authService.login(username, password).subscribe(
-      res => {
-        console.log(res);
-        if (res.hasOwnProperty('token')) {
-          this.authService.setToken((res as any).token);
-          this.authService.changeLoggedStatus(true);
-        } else {
-          this.authService.changeLoggedStatus(false);
-        }
-      },
-      error => {
-        this.authService.changeLoggedStatus(false);
-      });
-  }
 
 }
 

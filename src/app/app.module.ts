@@ -7,6 +7,10 @@ import {HttpClientModule} from '@angular/common/http';
 import { VotingsComponent } from './votings/votings.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { IndexComponent } from './index/index.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -14,12 +18,16 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     LoginComponent,
     VotingsComponent,
     PageNotFoundComponent,
+    IndexComponent,
+    HeaderComponent,
+    FooterComponent,
 
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

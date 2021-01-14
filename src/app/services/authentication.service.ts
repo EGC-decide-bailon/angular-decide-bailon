@@ -7,15 +7,9 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthenticationService {
-
   isLogged: boolean;
   statusChanged = new EventEmitter<boolean>();
-
-  private headers = new HttpHeaders({'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'});
-
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   login(username2: string, password2: string): Observable<object> {
     if (username2 !== '' && password2 !== '') {
