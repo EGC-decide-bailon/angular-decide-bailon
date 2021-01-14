@@ -65,7 +65,7 @@ export class VotingsComponent implements OnInit {
     });
 }
 
-onSubmitVote(datos: string, event: Event): void {
+onSubmitVote(event: Event): void {
   
   event.preventDefault();
   this.isSubmitted = true;
