@@ -26,7 +26,7 @@ export class VotingService {
         options.push(new QuestionOption(o.num, o.option, false));
       });
       const question = new Question(voting.question.desc, options);
-      voting = new Voting(voting.id, voting.name, voting.desc, question, voting.startDate, voting.endDate, voting.pubKey);
+      voting = new Voting(voting.id, "hola caracola", voting.desc, question, voting.startDate, voting.endDate, voting.pubKey);
       return voting;
   }
 

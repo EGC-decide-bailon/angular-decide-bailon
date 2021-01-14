@@ -28,7 +28,7 @@ export class VotingsComponent implements OnInit {
               private authService: AuthenticationService) { }
 
   votingForm = this.fb.group({
-    gender: ['', [Validators.required]]
+    option: ['', [Validators.required]]
   });
 
   get myForm(): AbstractControl {
