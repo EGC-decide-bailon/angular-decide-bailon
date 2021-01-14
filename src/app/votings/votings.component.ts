@@ -6,7 +6,7 @@ import {VotingService} from '../services/voting.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Question } from '../models/question.model';
 import { NgForm } from '@angular/forms';
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -21,18 +21,16 @@ export class VotingsComponent implements OnInit {
   options: QuestionOption[] ;
   loading: boolean;
   isSubmitted = false;
-  si:number;
-  no:number;
+  si: number;
+  no: number;
 
-  constructor(public fb: FormBuilder,private route: ActivatedRoute, private router: Router, private votingService: VotingService,
+  constructor(public fb: FormBuilder, private route: ActivatedRoute, private router: Router, private votingService: VotingService,
               private authService: AuthenticationService) { }
-
-
 
   votingForm = this.fb.group({
     gender: ['', [Validators.required]]
-  })
-  
+  });
+
   get myForm() {
     return this.votingForm.get('option');
   }
@@ -44,7 +42,7 @@ export class VotingsComponent implements OnInit {
     } else {
     alert(JSON.stringify(form.value))
     }
-  }            
+  }           
 
   ngOnInit(): void {
     this.singup = true;
@@ -71,13 +69,12 @@ onSubmitVote(event: Event): void {
   this.isSubmitted = true;
   this.loading = true;
 
-
-  if(this.myForm.value==1){
-    this.si=1;
-    this.no=0;
+  if (this.myForm.value === 1){
+    this.si = 1;
+    this.no = 0;
   }else{
-    this.si=0;
-    this.no=1;
+    this.si= 0;
+    this.no= 1;
   }
 
   const tokenid = this.authService.getToken();
