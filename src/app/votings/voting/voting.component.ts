@@ -56,7 +56,7 @@ export class VotingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.logged = !this.authService.isLogged;
+    this.logged = this.authService.getToken() !== null ? true : false;
     const id = +this.route.snapshot.params.id - 1;
     this.votingService.getVoting(id).subscribe((res) => {
       console.log(res[id]);
@@ -65,44 +65,42 @@ export class VotingComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-}
-
-onSubmitVote(event: Event): void {
-
-  event.preventDefault();
-
-  this.isSubmitted = true;
-  this.loading = true;
-
-  if (this.myForm.value === 1){
-    this.si = 1;
-    this.no = 0;
-  }else{
-    this.si = 0;
-    this.no = 1;
   }
 
-  const tokenid = this.authService.getToken();
-  console.log('Token ' + tokenid);
-  console.log('obteniendo usuario');
-  this.authService.getUser(tokenid).subscribe((res) => {
-    const id = (res as any).id;
+  onSubmitVote(event: Event): void {
 
-    const data = {
-      vote: { a: this.si , b: this.no },
-      voting: this.voting.id,
-      voter: id,
-      token: tokenid
-    };
-    const e = this.votingService.postData(data).subscribe((ser) => {
-      this.router.navigate(['']);
+    event.preventDefault();
+
+    this.isSubmitted = true;
+    this.loading = true;
+
+    if (this.myForm.value === 1){
+      this.si = 1;
+      this.no = 0;
+    }else{
+      this.si = 0;
+      this.no = 1;
+    }
+
+    const tokenid = this.authService.getToken();
+    this.authService.getUser(tokenid).subscribe((res) => {
+      const id = (res as any).id;
+
+      const data = {
+        vote: { a: this.si , b: this.no },
+        voting: this.voting.id,
+        voter: id,
+        token: tokenid
+      };
+      const e = this.votingService.postData(data).subscribe((ser) => {
+        this.router.navigate(['']);
+      }, (error) => {
+        console.log(error);
+      });
     }, (error) => {
       console.log(error);
     });
-  }, (error) => {
-    console.log(error);
-  });
-}
+  }
 }
 
 
