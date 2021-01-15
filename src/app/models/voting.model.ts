@@ -21,7 +21,7 @@ class PubKey {
 }
 
 @jsonObject
-class Option {
+export class Option {
   @jsonMember({constructor: Number})
   number: number;
   @jsonMember({constructor: String})
@@ -29,7 +29,7 @@ class Option {
 }
 
 @jsonObject
-class Question {
+export class Question {
   @jsonMember({constructor: String})
   desc: string;
   @jsonArrayMember(Option)
