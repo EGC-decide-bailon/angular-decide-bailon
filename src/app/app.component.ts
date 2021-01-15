@@ -18,12 +18,10 @@ export class AppComponent implements OnInit{
 
     if (this.token || this.token !== '') {
       this.authService.getUser(this.token).subscribe((res) => {
-        console.log('2');
-        console.log(res);
+        console.log('2: ' + res);
         this.authService.changeLoggedStatus(true);
       }, (error) => {
-        console.log('3');
-        console.log(error);
+        console.log('3: ' + error);
         this.authService.changeLoggedStatus(false);
         this.authService.removeToken();
       });

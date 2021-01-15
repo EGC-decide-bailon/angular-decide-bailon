@@ -3,8 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs';
 import { Voting } from '../models/voting.model';
-import {Question} from '../models/question.model';
-import { QuestionOption } from '../models/questionOptions.model';
+import {AppComponent} from '../app.component';
 
 @Injectable({
   providedIn: 'root'
@@ -21,17 +20,11 @@ export class VotingService {
   }
 
   parseVoting(voting: any): Voting {
-      const options: QuestionOption[] = [];
-      voting.question.options.forEach(o => {
-        options.push(new QuestionOption(o.num, o.option, false));
-      });
-      const question = new Question(voting.question.desc, options);
-      voting = new Voting(voting.id, "hola caracola", voting.desc, question, voting.startDate, voting.endDate, voting.pubKey);
       return voting;
   }
 
   getVoting(id: number): Observable<object> {
-    return this.http.get(`${environment.apiUrl}gateway/voting/?id=${id}`);
+    return this.http.get(`${environment.apiUrl}gateway/voting/?id=` + id);
   }
 
   postData(data: { vote: { a: any; b: any; }; voting: number; voter: number; token: string; }): Observable<object> {

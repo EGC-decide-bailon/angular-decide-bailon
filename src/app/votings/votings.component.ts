@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Voting } from '../models/voting.model';
-import {QuestionOption} from '../models/questionOptions.model';
 import {AuthenticationService} from '../services/authentication.service';
 import {VotingService} from '../services/voting.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import { Question } from '../models/question.model';
 import {AbstractControl, NgForm} from '@angular/forms';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import {TypedJSON} from 'typedjson';
 
 @Component({
   selector: 'app-votings',
@@ -16,9 +15,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 
 export class VotingsComponent implements OnInit {
+  logged: boolean;
   singup: boolean;
   voting: Voting;
-  options: QuestionOption[] ;
   loading: boolean;
   isSubmitted = false;
   si: number;
@@ -35,11 +34,17 @@ export class VotingsComponent implements OnInit {
     return this.votingForm.get('option');
   }
 
-  get votingName(){ return (this.voting && this.voting.name) ? this.voting.name : null }
+  get votingName(): string {
+    return (this.voting && this.voting.name) ? this.voting.name : null;
+  }
 
-  get votingId(){ return (this.voting && this.voting.id) ? this.voting.id : null}
+  get votingId(): number {
+    return (this.voting && this.voting.id) ? this.voting.id : null;
+  }
 
-  get votingQuestionDesc() { return (this.voting && this.voting.question.desc) ? this.voting.question.desc : null}
+  get votingQuestionDesc(): string {
+    return (this.voting && this.voting.question.desc) ? this.voting.question.desc : null;
+  }
 
   submitForm(form: NgForm): boolean {
     this.isSubmitted = true;
@@ -51,9 +56,12 @@ export class VotingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.params.id;
-    this.votingService.getVoting(this.votingId).subscribe((res) => {
-      this.voting = this.votingService.parseVoting(res);
+    this.logged = !this.authService.isLogged;
+    const id = +this.route.snapshot.params.id - 1;
+    this.votingService.getVoting(id).subscribe((res) => {
+      console.log(res[id]);
+      this.voting = TypedJSON.parse(res[id], Voting);
+      console.log(this.voting);
     }, error => {
       console.log(error);
     });
@@ -75,6 +83,8 @@ onSubmitVote(event: Event): void {
   }
 
   const tokenid = this.authService.getToken();
+  console.log('Token ' + tokenid);
+  console.log('obteniendo usuario');
   this.authService.getUser(tokenid).subscribe((res) => {
     const id = (res as any).id;
 
