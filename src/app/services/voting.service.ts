@@ -25,19 +25,18 @@ export class VotingService {
   }
 
 
-  getVotings():  Observable<object> {
+  getVotings(): Observable<object> {
     return this.http.get(`${environment.apiUrl}gateway/voting/`);
   }
 
   parseVotings(votings: any): Voting[] {
     const res: Voting[] = [];
-    votings.forEach(v => {   
+    votings.forEach(v => {
       res.push(v.parseVoting);
     });
     return res;
   }
 
-  
   postData(data: { vote: { a: any; b: any; }; voting: number; voter: number; token: string; }): Observable<object> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json').set('Authorization', 'Token ' + data.token);

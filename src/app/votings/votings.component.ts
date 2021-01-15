@@ -15,10 +15,9 @@ export class VotingsComponent implements OnInit {
   logged: boolean;
   voting: Voting;
   votings: Voting[] = [];
-  
 
   constructor( private route: ActivatedRoute, private router: Router, private votingService: VotingService,
-              private authService: AuthenticationService) { }
+               private authService: AuthenticationService) { }
 
   get votingName(): string {
     return (this.voting && this.voting.name) ? this.voting.name : null;
@@ -36,7 +35,7 @@ export class VotingsComponent implements OnInit {
   ngOnInit(): void {
     this.logged = this.authService.getToken() !== null ? true : false;
     this.votingService.getVotings().subscribe((res) => {
-      for(let r in res){
+      for (let r = 0; r in res; r++){
         this.votings.push(this.votingService.parseVoting(res[r]));
       }
     });
