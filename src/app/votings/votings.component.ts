@@ -35,6 +35,12 @@ export class VotingsComponent implements OnInit {
     return this.votingForm.get('option');
   }
 
+  get votingName(){ return (this.voting && this.voting.name) ? this.voting.name : null }
+
+  get votingId(){ return (this.voting && this.voting.id) ? this.voting.id : null}
+
+  get votingQuestionDesc() { return (this.voting && this.voting.question.desc) ? this.voting.question.desc : null}
+
   submitForm(form: NgForm): boolean {
     this.isSubmitted = true;
     if (!form.valid) {
@@ -45,21 +51,11 @@ export class VotingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.singup = true;
-    this.voting = new Voting(1, '', '', (new Question('',
-      [new QuestionOption(0, '', true),
-        new QuestionOption(1, '', false)])), new Date(), new Date(), []);
-    this.singup = true;
-    const tokenId = this.authService.getToken();
-    this.authService.getUser(tokenId).subscribe((res) => {
-      const id = (res as any).id;
-      console.log('se ha hecho la petición');
-      this.votingService.getVoting(id).subscribe((res2) => {
-        console.log('Resultado' + res);
-        this.voting = this.votingService.parseVoting(res2);
-        }, error => {
-          console.log(error);
-      });
+    const id = +this.route.snapshot.params.id;
+    this.votingService.getVoting(this.votingId).subscribe((res) => {
+      this.voting = this.votingService.parseVoting(res);
+    }, error => {
+      console.log(error);
     });
 }
 

@@ -2,16 +2,16 @@
 <div id="app-booth" class="principal">
 
   
-    <h1>{{ voting.id }} - {{ voting.name }}</h1>
+    <h1>{{ votingId }} - {{ votingName }}</h1>
 
-    <!-- <div *ngIf="!logged">
+    <div *ngIf="!logged">
       <app-login></app-login>
-    </div> -->
+    </div>
 
     <!-- Voting -->
-    <div>      
+    <div *ngIf="logged">      
 
-      <h2>{{ voting.question.desc }}</h2>
+      <h2>{{ votingQuestionDesc }}</h2>
 
       <form [formGroup]="votingForm" (ngSubmit)="onSubmitVote($event)" novalidate>
         <div class="custom-control custom-radio" >
