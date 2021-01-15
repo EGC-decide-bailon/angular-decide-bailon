@@ -10,9 +10,6 @@ import {AppComponent} from '../app.component';
 })
 export class VotingService {
 
-  private headers = new HttpHeaders({'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'});
-
   constructor(private http: HttpClient) { }
 
   parseVoting(voting: any): Voting {

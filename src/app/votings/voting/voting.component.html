@@ -1,11 +1,12 @@
 
 <div id="app-booth" class="principal">
 
+  <div *ngIf="logged">
 
     <h1>{{ votingId }} - {{ votingName }}</h1>
 
     <!-- Voting -->
-    <div *ngIf="logged">
+    <div>
 
       <h2>{{ votingQuestionDesc }}</h2>
 
@@ -29,10 +30,10 @@
           <button class="button button-3" type="submit"> Vota </button>
         </div>
       </form>
-
     </div>
+  </div>
 
-  <div>
+  <div *ngIf="!logged">
     <h1>No has iniciado sesión</h1>
   </div>
 
