@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VotingComponent } from './voting.component';
 
-describe('VotingComponent', () => {
+describe('BoothComponent', () => {
   let component: VotingComponent;
   let fixture: ComponentFixture<VotingComponent>;
 
@@ -23,3 +23,4 @@ describe('VotingComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

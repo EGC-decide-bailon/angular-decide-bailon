@@ -15,10 +15,6 @@ export class VotingService {
 
   constructor(private http: HttpClient) { }
 
-  getVotingsByUserId(id: number): Observable<object> {
-    return this.http.get(`${environment.apiUrl}gateway/voting/?id=${id}`);
-  }
-
   parseVoting(voting: any): Voting {
       return voting;
   }
