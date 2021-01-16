@@ -7,8 +7,7 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  isLogged: boolean;
-  statusChanged = new EventEmitter<boolean>();
+  static logged: boolean;
   constructor(private http: HttpClient) { }
 
   login(username2: string, password2: string): Observable<object> {
@@ -28,7 +27,6 @@ export class AuthenticationService {
   getUser(token: string): Observable<object> {
     const data = {token};
     return this.http.post(`${environment.apiUrl}gateway/authentication/getuser/`, data);
-  }
 
   getToken(): string {
     const cookies = document.cookie.split('; ');
@@ -50,8 +48,11 @@ export class AuthenticationService {
     document.cookie = 'sessionid=;';
   }
 
+  isLogged(): boolean {
+    return AuthenticationService.logged;
+  }
+
   changeLoggedStatus(newStatus: boolean): void {
-    this.isLogged = newStatus;
-    this.statusChanged.emit(this.isLogged);
+    AuthenticationService.logged = newStatus;
   }
 }
