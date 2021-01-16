@@ -8,7 +8,6 @@ import {IndexComponent} from './index/index.component';
 
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent},
   { path: '', component: IndexComponent},
   { path: 'votings/:id', component: VotingComponent},
   { path: 'votings', component: VotingsComponent},
