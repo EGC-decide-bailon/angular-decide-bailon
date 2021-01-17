@@ -29,6 +29,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should have', () => {
-    expect(component).toBeTruthy();
+    const display = element.querySelector('.navbar-brand');
+    expect(display.textContent).toContain('Decide Bailon');
   });
 });
