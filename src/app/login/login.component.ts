@@ -9,8 +9,6 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   submitted: boolean;
-  loading: boolean;
-  logged: string;
 
   constructor(private authService: AuthenticationService, private router: Router) { }
 
@@ -27,7 +25,6 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(username, password).subscribe(
       res => {
-        this.loading = false;
         console.log(res);
         if (res.hasOwnProperty('token')) {
           this.authService.setToken((res as any).token);
@@ -39,7 +36,6 @@ export class LoginComponent implements OnInit {
       },
       error => {
         this.authService.changeLoggedStatus(false);
-        this.loading = false;
       });
   }
 }

@@ -33,7 +33,9 @@ export class VotingsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.logged = this.authService.getToken() !== null ? true : false;
+    this.authService.statusChanged.subscribe(r => {
+      this.logged = r;
+    });
     this.votingService.getVotings().subscribe((res) => {
       for (let r = 0; r in res; r++){
         this.votings.push(this.votingService.parseVoting(res[r]));
