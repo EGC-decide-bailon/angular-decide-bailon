@@ -5,11 +5,10 @@ import {VotingService} from 'src/app/services/voting.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractControl, NgForm} from '@angular/forms';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
 import {TypedJSON} from 'typedjson';
 
 @Component({
-  selector: 'app-votings',
+  selector: 'app-voting',
   templateUrl: './voting.component.html',
   styleUrls: ['./voting.component.css']
 })
