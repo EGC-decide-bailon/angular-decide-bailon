@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         if (res.hasOwnProperty('token')) {
           this.authService.setToken((res as any).token);
           this.authService.changeLoggedStatus(true);
-          this.router.navigate(['']).then(r => ' ');
+          window.location.reload();
         } else {
           this.authService.changeLoggedStatus(false);
         }

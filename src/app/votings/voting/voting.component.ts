@@ -56,12 +56,13 @@ export class VotingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.logged = this.authService.getToken() !== null ? true : false;
+    this.authService.statusChanged.subscribe(r => {
+      this.logged = r;
+    });
     const id = +this.route.snapshot.params.id - 1;
     this.votingService.getVoting(id).subscribe((res) => {
       console.log(res[id]);
       this.voting = TypedJSON.parse(res[id], Voting);
-      console.log(this.voting);
     }, error => {
       console.log(error);
     });

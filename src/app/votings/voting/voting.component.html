@@ -1,41 +1,26 @@
-
 <div id="app-booth" class="principal">
-
   <div *ngIf="logged">
-
     <h1>{{ votingId }} - {{ votingName }}</h1>
-
-    <!-- Voting -->
-    <div>
-
-      <h2>{{ votingQuestionDesc }}</h2>
-
-      <form [formGroup]="votingForm" (ngSubmit)="onSubmitVote($event)" novalidate>
-        <div class="custom-control custom-radio" >
-          <input type="radio" class="form-check-input" id="si" name="option" value="1">
-          <label for="si" class="form-check-label" >1. Si</label>
-        </div>
-
-        <div class="custom-control custom-radio" >
-          <input type="radio" class="form-check-input" id="no" name="option" value="0">
-          <label for="no" class="form-check-label" >2. No</label>
-        </div>
-
-        <div *ngIf="isSubmitted && myForm.invalid">
-          <p>Por favor seleccione una opción</p>
-       </div>
-
-
-        <div class="boton">
-          <button class="button button-3" type="submit"> Vota </button>
-        </div>
-      </form>
+    <h2>{{ votingQuestionDesc }}</h2>
+    <form [formGroup]="votingForm" (ngSubmit)="onSubmitVote($event)" novalidate>
+      <div class="custom-control custom-radio" >
+        <input type="radio" class="form-check-input" id="si" name="option" value="1">
+        <label for="si" class="form-check-label" >1. Si</label>
+      </div>
+      <div class="custom-control custom-radio" >
+        <input type="radio" class="form-check-input" id="no" name="option" value="0">
+        <label for="no" class="form-check-label" >2. No</label>
+      </div>
+      <div *ngIf="isSubmitted && myForm.invalid">
+        <p>Por favor seleccione una opción</p>
+     </div>
+      <div class="boton">
+        <button class="button button-3" type="submit"> Vota </button>
+      </div>
+    </form>
     </div>
-  </div>
-
   <div *ngIf="!logged">
     <h1>No has iniciado sesión</h1>
   </div>
-
 </div>
 

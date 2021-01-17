@@ -8,6 +8,7 @@ import {environment} from '../../environments/environment';
 })
 export class AuthenticationService {
   static logged: boolean;
+  statusChanged = new EventEmitter<boolean>();
   constructor(private http: HttpClient) { }
 
   login(username2: string, password2: string): Observable<object> {
@@ -21,19 +22,17 @@ export class AuthenticationService {
   }
 
   logout(): Observable<object> {
-    return this.http.post(`${environment.apiUrl}authentication/logout`, {token: this.getToken()});
+    return this.http.post(`${environment.apiUrl}authentication/logout/`, {token: this.getToken()});
   }
 
-  getUser(token2: string): Observable<object> {
-    const body = { token: token2 };
-    return this.http.post(`${environment.apiUrl}authentication/getuser/`, body);
+  getUser(token: string): Observable<object> {
+    const data = {token};
+    return this.http.post(`${environment.apiUrl}gateway/authentication/getuser/`, data);
   }
 
   getToken(): string {
     const cookies = document.cookie.split('; ');
     let token = '';
-    console.log(cookies);
-    console.log(document.cookie);
     cookies.forEach((c) => {
       const cs = c.split('=');
       if (cs[0] === 'sessionid' && cs[1]) {
