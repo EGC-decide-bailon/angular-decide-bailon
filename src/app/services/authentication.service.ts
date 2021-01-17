@@ -7,7 +7,7 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  static logged: boolean;
+  logged: boolean;
   statusChanged = new EventEmitter<boolean>();
   constructor(private http: HttpClient) { }
 
@@ -41,20 +41,14 @@ export class AuthenticationService {
     });
     return token;
   }
-
   setToken(token: string): void {
     document.cookie = 'sessionid=' + token + ';';
   }
-
   removeToken(): void {
     document.cookie = 'sessionid=;';
   }
-
-  isLogged(): boolean {
-    return AuthenticationService.logged;
-  }
-
   changeLoggedStatus(newStatus: boolean): void {
-    AuthenticationService.logged = newStatus;
+    this.logged = newStatus;
+    this.statusChanged.emit(this.logged);
   }
 }

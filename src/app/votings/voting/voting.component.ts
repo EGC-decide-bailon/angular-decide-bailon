@@ -16,9 +16,7 @@ import {TypedJSON} from 'typedjson';
 
 export class VotingComponent implements OnInit {
   logged: boolean;
-  singup: boolean;
   voting: Voting;
-  loading: boolean;
   isSubmitted = false;
   si: number;
   no: number;
@@ -73,7 +71,6 @@ export class VotingComponent implements OnInit {
     event.preventDefault();
 
     this.isSubmitted = true;
-    this.loading = true;
 
     if (this.myForm.value === 1){
       this.si = 1;
