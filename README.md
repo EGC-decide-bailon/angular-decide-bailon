@@ -1,4 +1,26 @@
-# CabinaBailon
+# Interfaz en angular de Cabina de decide
+
+En este proyecto se ha desarrollado una interfaz para la Cabina de decide con Angular.
+
+## Funcionalidades
+
+Esta interfaz permite realizar las siguientes acciones :
+- Iniciar sesión
+- Cerrar Sesión
+- Acceder al listado de diferentes votaciones activas (si el usuario está registrado)
+- Participar en la votación que seleccione
+
+Este proyecto se encuentra desplegado en Heroku con el siguiente enlace :
+https://decide-angular-bailon.herokuapp.com/
+
+## Imágenes de la interfaz.
+
+![Imagen 1](Imagenes/angular1.png "Inicio")
+
+
+
+
+## Información sobre el proyecto y su desarrollo en Angular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
 
