@@ -15,7 +15,7 @@ https://decide-angular-bailon.herokuapp.com/
 
 ## Imágenes de la interfaz.
 
-![Imagen 1](Imagenes/angular1.png "Inicio")
+![Imagen 1](Images/angular1.png "Inicio")
 
 
 
