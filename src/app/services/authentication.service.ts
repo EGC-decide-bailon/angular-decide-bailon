@@ -8,6 +8,7 @@ import {environment} from '../../environments/environment';
 })
 export class AuthenticationService {
   static logged: boolean;
+  statusChanged = new EventEmitter<boolean>();
   constructor(private http: HttpClient) { }
 
   login(username2: string, password2: string): Observable<object> {
