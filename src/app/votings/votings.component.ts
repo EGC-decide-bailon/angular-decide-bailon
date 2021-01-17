@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Voting } from '../models/voting.model';
 import {AuthenticationService} from '../services/authentication.service';
 import {VotingService} from '../services/voting.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router} from   '@angular/router';
+import {ChangeDetectorRef} from '@angular/core';
 
 
 @Component({
@@ -12,12 +13,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 
 export class VotingsComponent implements OnInit {
-  logged: boolean;
   voting: Voting;
   votings: Voting[] = [];
 
   constructor( private route: ActivatedRoute, private router: Router, private votingService: VotingService,
-               private authService: AuthenticationService) { }
+               private authService: AuthenticationService, private cd: ChangeDetectorRef) { }
 
   get votingName(): string {
     return (this.voting && this.voting.name) ? this.voting.name : null;
@@ -33,13 +33,12 @@ export class VotingsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.authService.statusChanged.subscribe(r => {
-      this.logged = r;
-    });
     this.votingService.getVotings().subscribe((res) => {
       for (let r = 0; r in res; r++){
         this.votings.push(this.votingService.parseVoting(res[r]));
       }
+      this.cd.detectChanges();
+      console.log('loading complete');
     });
     }
   }

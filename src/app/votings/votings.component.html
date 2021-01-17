@@ -1,9 +1,9 @@
 <div id="app-booth" class="principal">
 
   <h2>Lista de votaciones</h2>
- 
+
   <!-- Votings -->
-  <div *ngIf="logged">
+  <div>
     <div *ngFor = "let v of votings">
       <a [routerLink]="[v.id]">{{v.id}}. {{v.question.desc}}</a>
     </div>

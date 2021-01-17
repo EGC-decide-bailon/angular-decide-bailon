@@ -15,7 +15,6 @@ import {TypedJSON} from 'typedjson';
 })
 
 export class VotingComponent implements OnInit {
-  logged: boolean;
   voting: Voting;
   isSubmitted = false;
   si: number;
@@ -46,6 +45,7 @@ export class VotingComponent implements OnInit {
 
   submitForm(form: NgForm): boolean {
     this.isSubmitted = true;
+    console.log(form.value);
     if (!form.valid) {
       return false;
     } else {
@@ -54,9 +54,6 @@ export class VotingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.statusChanged.subscribe(r => {
-      this.logged = r;
-    });
     const id = +this.route.snapshot.params.id - 1;
     this.votingService.getVoting(id).subscribe((res) => {
       console.log(res[id]);
@@ -79,6 +76,8 @@ export class VotingComponent implements OnInit {
       this.si = 0;
       this.no = 1;
     }
+
+
 
     const tokenid = this.authService.getToken();
     this.authService.getUser(tokenid).subscribe((res) => {
