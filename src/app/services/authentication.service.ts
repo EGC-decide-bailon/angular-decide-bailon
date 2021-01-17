@@ -27,6 +27,7 @@ export class AuthenticationService {
   getUser(token: string): Observable<object> {
     const data = {token};
     return this.http.post(`${environment.apiUrl}gateway/authentication/getuser/`, data);
+  }
 
   getToken(): string {
     const cookies = document.cookie.split('; ');
