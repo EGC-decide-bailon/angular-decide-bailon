@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Voting } from '../models/voting.model';
 import {AuthenticationService} from '../services/authentication.service';
 import {VotingService} from '../services/voting.service';
-import {ActivatedRoute, Router} from   '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ChangeDetectorRef} from '@angular/core';
 
 
