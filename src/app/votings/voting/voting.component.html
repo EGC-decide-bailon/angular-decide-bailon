@@ -1,5 +1,5 @@
 <div id="app-booth" class="principal">
-  <div *ngIf="logged">
+  <div>
     <h1>{{ votingId }} - {{ votingName }}</h1>
     <h2>{{ votingQuestionDesc }}</h2>
     <form [formGroup]="votingForm" (ngSubmit)="onSubmitVote($event)" novalidate>
@@ -18,9 +18,6 @@
         <button class="button button-3" type="submit"> Vota </button>
       </div>
     </form>
-    </div>
-  <div *ngIf="!logged">
-    <h1>No has iniciado sesión</h1>
   </div>
 </div>
 
