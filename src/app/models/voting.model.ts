@@ -8,7 +8,7 @@ export class Auth {
   url: string;
   @jsonMember({constructor: Boolean})
   me: boolean;
-  constructor(name:string,url:string,me:boolean){}
+  constructor(name: string, url: string, me: boolean){}
 }
 
 @jsonObject
@@ -19,7 +19,7 @@ export class PubKey {
   g: number;
   @jsonMember({constructor: Number})
   y: number;
-  constructor(p:number, g:number, y:number){}
+  constructor(p: number, g: number, y: number){}
 }
 
 @jsonObject
@@ -28,7 +28,8 @@ export class Option {
   number: number;
   @jsonMember({constructor: String})
   option: string;
-  constructor(number:number, option:string){}
+  // tslint:disable-next-line:variable-name
+  constructor(number: number, option: string){}
 }
 
 @jsonObject
@@ -65,6 +66,7 @@ export class Voting {
   tally: null;
   @jsonMember({constructor: Object})
   postproc: null;
-  constructor(id:number, name:string, desc:string, question:Question, start_date: Date, end_date: Date,
-    pub_key: PubKey,auths: Auth[],tally: null,postproc: null){}
+  // tslint:disable-next-line:variable-name
+  constructor(id: number, name: string, desc: string, question: Question, start_date: Date, end_date: Date, pub_key: PubKey,
+              auths: Auth[], tally: null, postproc: null){}
 }
