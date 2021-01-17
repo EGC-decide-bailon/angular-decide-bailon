@@ -24,6 +24,10 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
   });
 
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
   it('should have', () => {
     const display = element.querySelector('.text-center');
     expect(display.textContent).toContain('Log in');
