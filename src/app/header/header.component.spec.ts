@@ -28,6 +28,20 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should show log in', () => {
+    component.logged = false;
+    fixture.detectChanges();
+    const display = element.querySelector('app-login');
+    expect(display).toBeTruthy();
+  });
+
+  it('should show log out', () => {
+    component.logged = true;
+    fixture.detectChanges();
+    const display = element.querySelector('.nav-link');
+    expect(display.textContent).toContain('Logout');
+  });
+
   it('should have', () => {
     const display = element.querySelector('.navbar-brand');
     expect(display.textContent).toContain('Decide Bailon');
