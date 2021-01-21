@@ -5,17 +5,17 @@
     <form [formGroup]="votingForm" (ngSubmit)="onSubmitVote($event)" novalidate>
       <div class="custom-control custom-radio" >
         <input type="radio" class="form-check-input" id="si" name="option" value="1">
-        <label for="si" class="form-check-label" >1. Si</label>
+        <label for="si" class="form-check-label" >1. Yes</label>
       </div>
       <div class="custom-control custom-radio" >
         <input type="radio" class="form-check-input" id="no" name="option" value="0">
         <label for="no" class="form-check-label" >2. No</label>
       </div>
       <div *ngIf="isSubmitted && myForm.invalid">
-        <p>Por favor seleccione una opción</p>
+        <p>Please select an option</p>
      </div>
       <div class="boton">
-        <button class="button button-3" type="submit"> Vota </button>
+        <button class="button button-3" type="submit"> Vote </button>
       </div>
     </form>
   </div>
